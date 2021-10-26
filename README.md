@@ -8,3 +8,6 @@ create any js file and type _rfce and tab to generate skeleton.
 
 In Tailwind everything is mobile first.
 So we use breakpoint for bigger screen sizes.
+
+
+_rfce for boilerplate react component
