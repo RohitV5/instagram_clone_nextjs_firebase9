@@ -5,14 +5,14 @@ import {HomeIcon} from '@heroicons/react/solid';
 
 function Header() {
   return (
-    <div className="shadow-sm">
+    <div className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto">
         {/* {Left} */}
         <div className="relative hidden w-24 h-24 cursor-pointer lg:inline-grid">
           <Image src="https://links.papareact.com/ocw" layout="fill" objectFit="contain"/>
         </div>
 
-        <div className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden" flex-shrink-0>
+        <div className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden">
           <Image src="https://links.papareact.com/jjm" layout="fill" objectFit="contain"/>
         </div>
 
