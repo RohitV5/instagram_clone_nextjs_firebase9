@@ -12,7 +12,7 @@ function Header() {
           <Image src="https://links.papareact.com/ocw" layout="fill" objectFit="contain"/>
         </div>
 
-        <div className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden" flex-shrink-0>
+        <div className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden">
           <Image src="https://links.papareact.com/jjm" layout="fill" objectFit="contain"/>
         </div>
 
