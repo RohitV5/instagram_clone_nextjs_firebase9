@@ -11,3 +11,6 @@ So we use breakpoint for bigger screen sizes.
 
 
 _rfce for boilerplate react component
+
+
+slice in redux = atoms in recoil.  one part of store for one particular use like for modal or user etc.
