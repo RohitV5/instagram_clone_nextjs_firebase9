@@ -2,11 +2,14 @@ import Image from "next/image";
 import { HeartIcon, MenuIcon, PaperAirplaneIcon, PlusCircleIcon, SearchIcon, UserGroupIcon } from '@heroicons/react/outline';
 import {HomeIcon} from '@heroicons/react/solid';
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 
 function Header() {
   // rename data key as session variable using object destructuring
   const {data: session} = useSession();
+  const router = useRouter();
+
   return (
     <div className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto">
@@ -15,7 +18,7 @@ function Header() {
           <Image src="https://links.papareact.com/ocw" layout="fill" objectFit="contain"/>
         </div>
 
-        <div className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden">
+        <div onClick={()=>router.push("/")} className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden">
           <Image src="https://links.papareact.com/jjm" layout="fill" objectFit="contain"/>
         </div>
 
@@ -35,7 +38,7 @@ function Header() {
 
         <div className="flex items-center justify-end space-x-4">
           
-            <HomeIcon className="navBtn"/>
+            <HomeIcon onClick={()=>router.push("/")} className="navBtn"/>
             <MenuIcon className="cursor-pointer h6 md:hidden"/>
             {session  ? (
               <>
