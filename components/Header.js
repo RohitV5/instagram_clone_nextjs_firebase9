@@ -1,9 +1,18 @@
 import Image from "next/image";
 import { HeartIcon, MenuIcon, PaperAirplaneIcon, PlusCircleIcon, SearchIcon, UserGroupIcon } from '@heroicons/react/outline';
 import {HomeIcon} from '@heroicons/react/solid';
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { modalState } from "../atoms/modalAtoms";
+import { useRecoilState } from "recoil";
 
 
 function Header() {
+  // rename data key as session variable using object destructuring
+  const {data: session} = useSession();
+  const [open, setOpen] = useRecoilState(modalState);
+  const router = useRouter();
+
   return (
     <div className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto">
@@ -12,7 +21,7 @@ function Header() {
           <Image src="https://links.papareact.com/ocw" layout="fill" objectFit="contain"/>
         </div>
 
-        <div className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden">
+        <div onClick={()=>router.push("/")} className="relative flex-shrink-0 w-10 cursor-pointer lg:hidden">
           <Image src="https://links.papareact.com/jjm" layout="fill" objectFit="contain"/>
         </div>
 
@@ -29,19 +38,29 @@ function Header() {
 
         {/* {Right} */}
 
-        <div className="flex items-center justify-end space-x-4">
-            <HomeIcon className="navBtn"/>
-            <div className="relative navBtn">
-              <PaperAirplaneIcon className="rotate-45 navBtn"/>
-              <div className="absolute flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 rounded-full -top-1 -right-2 animate-pulse">3</div>
-            </div>
-            
-            <PlusCircleIcon className="navBtn"/>
-            <UserGroupIcon className="navBtn"/>
-            <HeartIcon className="navBtn" />
-            <MenuIcon className="cursor-pointer h6 md:hidden"/>
 
-            <img src="https://links.papareact.com/3ke" alt="profile pic" className="h-10 rounded-full cursor-pointer"/>
+        <div className="flex items-center justify-end space-x-4">
+          
+            <HomeIcon onClick={()=>router.push("/")} className="navBtn"/>
+            <MenuIcon className="cursor-pointer h6 md:hidden"/>
+            {session  ? (
+              <>
+                  <div className="relative navBtn">
+                    <PaperAirplaneIcon className="rotate-45 navBtn"/>
+                    <div className="absolute flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 rounded-full -top-1 -right-2 animate-pulse">3</div>
+                  </div>
+                  
+                  <PlusCircleIcon onClick={()=> setOpen(true)} className="navBtn"/>
+                  <UserGroupIcon className="navBtn"/>
+                  <HeartIcon className="navBtn" />
+
+
+                  <img onClick={signOut} src={session?.user?.image} alt="profile pic" className="w-10 h-10 rounded-full cursor-pointer"/>
+                </>
+            ):(
+              <button onClick={signIn}>Sign In</button>
+            )}
+
             
         </div>
       </div>
